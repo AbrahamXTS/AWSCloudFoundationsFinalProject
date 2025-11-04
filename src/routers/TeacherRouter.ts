@@ -6,18 +6,18 @@ import { TeacherSchema } from "../models";
 import { InMemoryTeacherRepository } from "../repositories/implementations";
 import { TeacherService } from "../services";
 
-export const teacherRoutes = new Hono();
+export const teacherRouter = new Hono();
 
 const teacherRepository = new InMemoryTeacherRepository();
 const teacherService = new TeacherService(teacherRepository);
 
-teacherRoutes.get("/", async (context) => {
+teacherRouter.get("/", async (context) => {
 	const teachers = await teacherService.getAllTeachers();
 
 	return context.json(teachers);
 });
 
-teacherRoutes.get("/:id", async (context) => {
+teacherRouter.get("/:id", async (context) => {
 	const id = Number(context.req.param("id"));
 
 	const teacher = await teacherService.getTeacherById(id);
@@ -25,7 +25,7 @@ teacherRoutes.get("/:id", async (context) => {
 	return context.json(teacher);
 });
 
-teacherRoutes.post("/", async (context) => {
+teacherRouter.post("/", async (context) => {
 	const body = await context.req.json();
 
 	const parsedBody = TeacherSchema.safeParse(body);
@@ -39,7 +39,7 @@ teacherRoutes.post("/", async (context) => {
 	return context.json(teacher, 201);
 });
 
-teacherRoutes.put("/:id", async (context) => {
+teacherRouter.put("/:id", async (context) => {
 	const id = Number(context.req.param("id"));
 	const body = await context.req.json();
 
@@ -54,7 +54,7 @@ teacherRoutes.put("/:id", async (context) => {
 	return context.json(teacher);
 });
 
-teacherRoutes.delete("/:id", async (context) => {
+teacherRouter.delete("/:id", async (context) => {
 	const id = Number(context.req.param("id"));
 
 	await teacherService.deleteTeacher(id);

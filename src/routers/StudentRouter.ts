@@ -6,18 +6,18 @@ import { StudentSchema } from "../models";
 import { InMemoryStudentRepository } from "../repositories/implementations";
 import { StudentService } from "../services";
 
-export const studentRoutes = new Hono();
+export const studentRouter = new Hono();
 
 const studentRepository = new InMemoryStudentRepository();
 const studentService = new StudentService(studentRepository);
 
-studentRoutes.get("/", async (context) => {
+studentRouter.get("/", async (context) => {
 	const students = await studentService.getAllStudents();
 
 	return context.json(students);
 });
 
-studentRoutes.get("/:id", async (context) => {
+studentRouter.get("/:id", async (context) => {
 	const id = Number(context.req.param("id"));
 
 	const student = await studentService.getStudentById(id);
@@ -25,7 +25,7 @@ studentRoutes.get("/:id", async (context) => {
 	return context.json(student);
 });
 
-studentRoutes.post("/", async (context) => {
+studentRouter.post("/", async (context) => {
 	const body = await context.req.json();
 
 	const parsedBody = StudentSchema.safeParse(body);
@@ -39,7 +39,7 @@ studentRoutes.post("/", async (context) => {
 	return context.json(student, 201);
 });
 
-studentRoutes.put("/:id", async (context) => {
+studentRouter.put("/:id", async (context) => {
 	const id = Number(context.req.param("id"));
 	const body = await context.req.json();
 
@@ -54,7 +54,7 @@ studentRoutes.put("/:id", async (context) => {
 	return context.json(student);
 });
 
-studentRoutes.delete("/:id", async (context) => {
+studentRouter.delete("/:id", async (context) => {
 	const id = Number(context.req.param("id"));
 
 	await studentService.deleteStudent(id);
