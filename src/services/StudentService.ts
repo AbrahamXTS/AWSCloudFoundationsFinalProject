@@ -24,21 +24,13 @@ export class StudentService {
 	}
 
 	async createStudent(student: Student) {
-		const existingStudent = await this.studentRepository.findById(student.id);
-
-		if (existingStudent) {
-			throw new Error(`Student with id ${student.id} already exists`);
-		}
+		await this.studentRepository.findById(student.id);
 
 		return this.studentRepository.save(student);
 	}
 
 	async updateStudent(id: number, student: Student) {
-		const existingStudent = await this.studentRepository.findById(id);
-
-		if (!existingStudent) {
-			throw new ResourceNotFoundException(`Student with id ${id} not found`);
-		}
+		await this.studentRepository.findById(id);
 
 		return this.studentRepository.save({
 			...student,
@@ -47,11 +39,7 @@ export class StudentService {
 	}
 
 	async deleteStudent(id: number) {
-		const student = await this.studentRepository.findById(id);
-
-		if (!student) {
-			throw new ResourceNotFoundException(`Student with id ${id} not found`);
-		}
+		await this.studentRepository.findById(id);
 
 		return this.studentRepository.delete(id);
 	}

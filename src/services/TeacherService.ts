@@ -24,21 +24,13 @@ export class TeacherService {
 	}
 
 	async createTeacher(teacher: Teacher) {
-		const existingTeacher = await this.teacherRepository.findById(teacher.id);
-
-		if (existingTeacher) {
-			throw new Error(`Teacher with id ${teacher.id} already exists`);
-		}
+		await this.teacherRepository.findById(teacher.id);
 
 		return this.teacherRepository.save(teacher);
 	}
 
 	async updateTeacher(id: number, teacher: Teacher) {
-		const existingTeacher = await this.teacherRepository.findById(id);
-
-		if (!existingTeacher) {
-			throw new ResourceNotFoundException(`Teacher with id ${id} not found`);
-		}
+		await this.teacherRepository.findById(id);
 
 		return this.teacherRepository.save({
 			...teacher,
@@ -47,11 +39,7 @@ export class TeacherService {
 	}
 
 	async deleteTeacher(id: number) {
-		const teacher = await this.teacherRepository.findById(id);
-
-		if (!teacher) {
-			throw new ResourceNotFoundException(`Teacher with id ${id} not found`);
-		}
+		await this.teacherRepository.findById(id);
 
 		return this.teacherRepository.delete(id);
 	}
