@@ -24,13 +24,13 @@ export class StudentService {
 	}
 
 	async createStudent(student: Student) {
-		await this.studentRepository.findById(student.id);
+		await this.getStudentById(student.id);
 
 		return this.studentRepository.save(student);
 	}
 
 	async updateStudent(id: number, student: Student) {
-		await this.studentRepository.findById(id);
+		await this.getStudentById(id);
 
 		return this.studentRepository.save({
 			...student,
@@ -39,7 +39,7 @@ export class StudentService {
 	}
 
 	async deleteStudent(id: number) {
-		await this.studentRepository.findById(id);
+		await this.getStudentById(id);
 
 		return this.studentRepository.delete(id);
 	}
