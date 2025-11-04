@@ -24,6 +24,12 @@ export class TeacherService {
 	}
 
 	async createTeacher(teacher: Teacher) {
+		const existingTeacher = await this.teacherRepository.findById(teacher.id);
+
+		if (existingTeacher) {
+			throw new Error(`Teacher with id ${teacher.id} already exists`);
+		}
+
 		return this.teacherRepository.save(teacher);
 	}
 

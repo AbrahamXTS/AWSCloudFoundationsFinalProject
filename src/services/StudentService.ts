@@ -24,6 +24,12 @@ export class StudentService {
 	}
 
 	async createStudent(student: Student) {
+		const existingStudent = await this.studentRepository.findById(student.id);
+
+		if (existingStudent) {
+			throw new Error(`Student with id ${student.id} already exists`);
+		}
+
 		return this.studentRepository.save(student);
 	}
 
