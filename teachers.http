@@ -1,0 +1,34 @@
+POST http://localhost:8787/profesores
+Content-Type: application/json
+
+{
+	"id": 1,
+	"numeroEmpleado": 1,
+	"nombres": "Edgar Antonio",
+	"apellidos": "Cambranes Martinez",
+	"horasClase": 10
+}
+
+###
+GET http://localhost:8787/profesores
+
+###
+PUT http://localhost:8787/profesores/1
+Content-Type: application/json
+
+{
+	"id": 1,
+	"numeroEmpleado": 1,
+	"nombres": "Ernesto Antonio",
+	"apellidos": "Guerrero Lara",
+	"horasClase": 20
+}
+
+###
+GET http://localhost:8787/profesores/1
+
+###
+DELETE http://localhost:8787/profesores/1
+
+###
+GET http://localhost:8787/profesores

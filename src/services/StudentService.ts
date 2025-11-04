@@ -20,19 +20,17 @@ export class StudentService {
 	}
 
 	async getAllStudents() {
-		return this.studentRepository.findAll();
+		return await this.studentRepository.findAll();
 	}
 
 	async createStudent(student: Student) {
-		await this.getStudentById(student.id);
-
-		return this.studentRepository.save(student);
+		return await this.studentRepository.save(student);
 	}
 
 	async updateStudent(id: number, student: Student) {
 		await this.getStudentById(id);
 
-		return this.studentRepository.save({
+		return await this.studentRepository.save({
 			...student,
 			id,
 		});
@@ -41,6 +39,6 @@ export class StudentService {
 	async deleteStudent(id: number) {
 		await this.getStudentById(id);
 
-		return this.studentRepository.delete(id);
+		return await this.studentRepository.delete(id);
 	}
 }

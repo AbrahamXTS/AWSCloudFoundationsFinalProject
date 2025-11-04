@@ -1,0 +1,34 @@
+POST http://localhost:8787/alumnos
+Content-Type: application/json
+
+{
+	"id": 1,
+	"nombres": "Abraham",
+	"apellidos": "Espinosa Mendoza",
+	"matricula": "A21216408",
+	"promedio": 93
+}
+
+###
+GET http://localhost:8787/alumnos
+
+###
+PUT http://localhost:8787/alumnos/1
+Content-Type: application/json
+
+{
+	"id": 1,
+	"nombres": "Adriana Guadalupe",
+	"apellidos": "Guzmán Morales",
+	"matricula": "A21216409",
+	"promedio": 99
+}
+
+###
+GET http://localhost:8787/alumnos/1
+
+###
+DELETE http://localhost:8787/alumnos/1
+
+###
+GET http://localhost:8787/alumnos

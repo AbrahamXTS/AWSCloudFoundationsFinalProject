@@ -20,19 +20,17 @@ export class TeacherService {
 	}
 
 	async getAllTeachers() {
-		return this.teacherRepository.findAll();
+		return await this.teacherRepository.findAll();
 	}
 
 	async createTeacher(teacher: Teacher) {
-		await this.getTeacherById(teacher.id);
-
-		return this.teacherRepository.save(teacher);
+		return await this.teacherRepository.save(teacher);
 	}
 
 	async updateTeacher(id: number, teacher: Teacher) {
 		await this.getTeacherById(id);
 
-		return this.teacherRepository.save({
+		return await this.teacherRepository.save({
 			...teacher,
 			id,
 		});
@@ -41,6 +39,6 @@ export class TeacherService {
 	async deleteTeacher(id: number) {
 		await this.getTeacherById(id);
 
-		return this.teacherRepository.delete(id);
+		return await this.teacherRepository.delete(id);
 	}
 }
