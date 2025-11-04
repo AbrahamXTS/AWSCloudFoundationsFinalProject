@@ -27,6 +27,6 @@ jobs:
 
       - name: Build and push image to GHCR
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.actor }}/aws-cloud-foundation-final-project:${{ env.PACKAGE_VERSION }}
+          IMAGE_NAME=ghcr.io/abrahamxts/aws-cloud-foundation-final-project:${{ env.PACKAGE_VERSION }}
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
