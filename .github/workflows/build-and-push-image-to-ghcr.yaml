@@ -3,8 +3,6 @@ name: Build and Push Image to GHCR
 on:
   push:
     branches: [develop]
-  pull_request:
-    branches: [main]
 
 permissions:
   contents: read
