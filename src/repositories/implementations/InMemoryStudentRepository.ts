@@ -2,7 +2,7 @@ import type { Student } from "../../models";
 import type { StudentRepository } from "../StudentRepository";
 
 export class InMemoryStudentRepository implements StudentRepository {
-	private students = new Map<number, Student>();
+	private readonly students = new Map<number, Student>();
 
 	async findAll(): Promise<Student[]> {
 		return Array.from(this.students.values());

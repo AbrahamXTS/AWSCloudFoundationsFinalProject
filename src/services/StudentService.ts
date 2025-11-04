@@ -3,7 +3,7 @@ import type { Student } from "../models";
 import type { StudentRepository } from "../repositories";
 
 export class StudentService {
-	private studentRepository: StudentRepository;
+	private readonly studentRepository: StudentRepository;
 
 	constructor(studentRepository: StudentRepository) {
 		this.studentRepository = studentRepository;
