@@ -16,7 +16,7 @@ export class StudentService {
 			throw new ResourceNotFoundException(`Student with id ${id} not found`);
 		}
 
-		return this.studentRepository.findById(id);
+		return student;
 	}
 
 	async getAllStudents() {

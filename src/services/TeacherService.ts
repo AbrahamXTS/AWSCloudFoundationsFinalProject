@@ -16,7 +16,7 @@ export class TeacherService {
 			throw new ResourceNotFoundException(`Teacher with id ${id} not found`);
 		}
 
-		return this.teacherRepository.findById(id);
+		return teacher;
 	}
 
 	async getAllTeachers() {
