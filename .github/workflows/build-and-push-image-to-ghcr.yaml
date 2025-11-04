@@ -1,0 +1,32 @@
+name: Build and Push Image to GHCR
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Extract frontend properties
+        uses: rexdefuror/read-package-json@v1.0.5
+
+      - name: Build and push image to GHCR
+        run: |
+          IMAGE_NAME=ghcr.io/${{ github.actor }}/aws-cloud-foundation-final-project:${{ env.PACKAGE_VERSION }}
+          docker build -t $IMAGE_NAME .
+          docker push $IMAGE_NAME
