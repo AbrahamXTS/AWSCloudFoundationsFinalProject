@@ -2,7 +2,6 @@ POST http://localhost:8787/profesores
 Content-Type: application/json
 
 {
-	"id": 1,
 	"numeroEmpleado": 1,
 	"nombres": "Edgar Antonio",
 	"apellidos": "Cambranes Martinez",
@@ -17,7 +16,6 @@ PUT http://localhost:8787/profesores/1
 Content-Type: application/json
 
 {
-	"id": 1,
 	"numeroEmpleado": 1,
 	"nombres": "Ernesto Antonio",
 	"apellidos": "Guerrero Lara",

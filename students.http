@@ -2,7 +2,6 @@ POST http://localhost:8787/alumnos
 Content-Type: application/json
 
 {
-	"id": 1,
 	"nombres": "Abraham",
 	"apellidos": "Espinosa Mendoza",
 	"matricula": "A21216408",
@@ -17,7 +16,6 @@ PUT http://localhost:8787/alumnos/1
 Content-Type: application/json
 
 {
-	"id": 1,
 	"nombres": "Adriana Guadalupe",
 	"apellidos": "Guzmán Morales",
 	"matricula": "A21216409",

@@ -13,7 +13,7 @@ export class InMemoryStudentRepository implements StudentRepository {
 	}
 
 	async save(student: Student): Promise<Student> {
-		this.students.set(student.id, student);
+		this.students.set(student.id!, student);
 
 		return student;
 	}
