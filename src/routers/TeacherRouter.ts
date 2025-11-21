@@ -3,12 +3,12 @@ import z from "zod";
 
 import { BadRequestException } from "../exceptions";
 import { TeacherSchema } from "../models";
-import { InMemoryTeacherRepository } from "../repositories/implementations";
+import { PostgresTeacherRepository } from "../repositories/implementations";
 import { TeacherService } from "../services";
 
 export const teacherRouter = new Hono();
 
-const teacherRepository = new InMemoryTeacherRepository();
+const teacherRepository = new PostgresTeacherRepository();
 const teacherService = new TeacherService(teacherRepository);
 
 teacherRouter.get("/", async (context) => {

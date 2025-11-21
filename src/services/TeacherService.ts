@@ -27,10 +27,11 @@ export class TeacherService {
 		return await this.teacherRepository.save(teacher);
 	}
 
-	async updateTeacher(id: number, teacher: Teacher) {
-		await this.getTeacherById(id);
+	async updateTeacher(id: number, teacher: Partial<Teacher>) {
+		const existingTeacher = await this.getTeacherById(id);
 
 		return await this.teacherRepository.save({
+			...existingTeacher,
 			...teacher,
 			id,
 		});
