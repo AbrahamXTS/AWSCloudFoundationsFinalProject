@@ -1,18 +1,22 @@
 import { ResourceNotFoundException } from "../exceptions";
 import type { Student } from "../models";
-import type { StudentRepository } from "../repositories";
-import type { StorageRepository } from "../repositories/StorageRepository";
+import type { StorageRepository, StudentRepository } from "../repositories";
+
+import type { NotificatorService } from "./NotificatorService";
 
 export class StudentService {
 	private readonly studentRepository: StudentRepository;
 	private readonly storageRepository: StorageRepository;
+	private readonly notificatorService: NotificatorService;
 
 	constructor(
 		storageRepository: StorageRepository,
 		studentRepository: StudentRepository,
+		notificatorService: NotificatorService,
 	) {
 		this.storageRepository = storageRepository;
 		this.studentRepository = studentRepository;
+		this.notificatorService = notificatorService;
 	}
 
 	async getStudentById(id: number) {
@@ -31,6 +35,21 @@ export class StudentService {
 
 	async createStudent(student: Student) {
 		return await this.studentRepository.save(student);
+	}
+
+	async notifyStudentInformation(id: number) {
+		const student = await this.getStudentById(id);
+
+		await this.notificatorService.sendNotification(
+			"arn:aws:sns:us-east-1:658012973760:student-grades-topic",
+			`
+			Esta es la información que solicitaste:
+
+			- Matrícula: ${student.matricula}
+			- Nombre: ${student.nombres} ${student.apellidos}
+			- Promedio: ${student.promedio}
+			`,
+		);
 	}
 
 	async updateStudentProfilePicture(id: number, profilePicture: File) {

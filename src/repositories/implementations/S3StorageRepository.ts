@@ -11,7 +11,7 @@ export class S3StorageRepository implements StorageRepository {
 			secretAccessKey: ENV.AWS_SECRET_ACCESS_KEY,
 			sessionToken: ENV.AWS_SESSION_TOKEN,
 			bucket: ENV.AWS_S3_BUCKET_NAME,
-			region: ENV.AWS_S3_REGION,
+			region: ENV.AWS_REGION,
 		});
 
 		await bucket.write(destinationPath, file);

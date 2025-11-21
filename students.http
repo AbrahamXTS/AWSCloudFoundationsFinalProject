@@ -9,6 +9,9 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8787/alumnos/34/email
+
+###
 GET http://localhost:8787/alumnos
 
 ###

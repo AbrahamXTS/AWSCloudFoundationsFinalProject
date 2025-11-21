@@ -12,6 +12,7 @@
 		"lint": "biome check --write"
 	},
 	"dependencies": {
+		"@aws-sdk/client-sns": "^3.936.0",
 		"hono": "^4.10.4",
 		"zod": "^4.1.12"
 	},
