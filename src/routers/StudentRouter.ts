@@ -3,13 +3,17 @@ import z from "zod";
 
 import { BadRequestException } from "../exceptions";
 import { StudentSchema } from "../models";
-import { InMemoryStudentRepository } from "../repositories/implementations";
+import {
+	PostgresStudentRepository,
+	S3StorageRepository,
+} from "../repositories/implementations";
 import { StudentService } from "../services";
 
 export const studentRouter = new Hono();
 
-const studentRepository = new InMemoryStudentRepository();
-const studentService = new StudentService(studentRepository);
+const studentRepository = new PostgresStudentRepository();
+const storageRepository = new S3StorageRepository();
+const studentService = new StudentService(storageRepository, studentRepository);
 
 studentRouter.get("/", async (context) => {
 	const students = await studentService.getAllStudents();
@@ -37,6 +41,20 @@ studentRouter.post("/", async (context) => {
 	const student = await studentService.createStudent(parsedBody.data);
 
 	return context.json(student, 201);
+});
+
+studentRouter.post("/:id/fotoPerfil", async (context) => {
+	const id = Number(context.req.param("id"));
+	const body = await context.req.formData();
+
+	const profilePicture = body.get("foto") as File;
+
+	const student = await studentService.updateStudentProfilePicture(
+		id,
+		profilePicture,
+	);
+
+	return context.json(student, 200);
 });
 
 studentRouter.put("/:id", async (context) => {
