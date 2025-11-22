@@ -1,3 +1,4 @@
+export * from "./DynamoDBAuthenticationRepository";
 export * from "./InMemoryStudentRepository";
 export * from "./InMemoryTeacherRepository";
 export * from "./PostgresStudentRepository";

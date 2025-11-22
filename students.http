@@ -5,7 +5,8 @@ Content-Type: application/json
 	"nombres": "Abraham",
 	"apellidos": "Espinosa Mendoza",
 	"matricula": "A21216408",
-	"promedio": 93
+	"promedio": 93,
+	"password": "securePassword123"
 }
 
 ###
@@ -22,7 +23,8 @@ Content-Type: application/json
 	"nombres": "Adriana Guadalupe",
 	"apellidos": "Guzmán Morales",
 	"matricula": "A21216409",
-	"promedio": 99
+	"promedio": 99,
+	"password": "securePassword123"
 }
 
 ###

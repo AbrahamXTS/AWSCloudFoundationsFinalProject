@@ -6,6 +6,7 @@ export const StudentSchema = z.object({
 	apellidos: z.string().nonempty(),
 	fotoPerfilUrl: z.url().optional(),
 	matricula: z.string().nonempty(),
+	password: z.string().nonempty(),
 	promedio: z.number().min(0).max(100),
 });
 
